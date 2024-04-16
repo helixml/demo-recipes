@@ -1,22 +1,34 @@
 import React, { useState } from 'react'
 import { Box, Typography, Button, TextField, Container } from '@mui/material'
+import AppClient from '@helixml/apps-client'
 
 import heartHealthy from '../assets/img/heart-healthy.jpg'
 import spiceySpecials from '../assets/img/spicy-special.jpg'
 import sweetTreats from '../assets/img/sweet-treats.jpg'
 
+const appClient = AppClient({
+  token: 'abc',
+})
+
 const Dashboard = () => {
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [welcomeMessage, setWelcomeMessage] = useState('')
+
   const [output, setOutput] = useState({ name: '', email: '' })
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    // Explicitly cast formData values to string to resolve type error
-    const name = formData.get('name')
-    const email = formData.get('email')
+  const handleSubmitEmailSignup = () => {
     if (typeof name === 'string' && typeof email === 'string') {
       setOutput({ name, email })
     }
+  }
+
+  const handleGetWelcomeMessage = async () => {
+    const result = await appClient.runScript({
+      file_path: '/gptscripts/helloworld.gpt',
+      input: 'Oranges',
+    });
   }
 
   return (
@@ -65,58 +77,99 @@ const Dashboard = () => {
           </Box>
         </Box>
       ) : (
-        <Box
-          component="form"
-          sx={{
-            backgroundColor: 'white',
-            border: 8,
-            borderColor: 'primary.main',
-            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-            borderRadius: 8,
-            color: 'text.primary',
-            p: 2,
-            width: '100%',
-            height: '400px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-around',
-          }}
-          onSubmit={handleSubmit}
-        >
-          <Typography
-            variant="h4"
-            gutterBottom
+        <>
+          <Box
             sx={{
+              backgroundColor: 'white',
+              border: 8,
+              borderColor: 'primary.main',
+              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+              borderRadius: 8,
               color: 'text.primary',
-              textAlign: 'center',
-              fontWeight: 'bold',
+              p: 4,
+              mb: 4,
+              width: '100%',
+              height: '200px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-around',
             }}
           >
-            Sign Up for Personalised<br/>Recipe Recommendations
-          </Typography>
-          <Container maxWidth="md">
-            <TextField
-              label="Name"
-              name="name"
-              variant="filled"
-              required
-              fullWidth
-              sx={{ backgroundColor: 'white', borderRadius: 1 }}
-            />
-            <TextField
-              label="Email Address"
-              name="email"
-              type="email"
-              variant="filled"
-              required
-              fullWidth
-              sx={{ backgroundColor: 'white', borderRadius: 1, my: 2 }}
-            />
-            <Button variant="contained" color="primary" type="submit" fullWidth>
-              Submit
-            </Button>
-          </Container>
-        </Box>
+            <Typography
+              variant="h4"
+              gutterBottom
+              sx={{
+                color: 'text.primary',
+                textAlign: 'center',
+                fontWeight: 'bold',
+              }}
+            >
+              Get A Welcome Message
+            </Typography>
+            <Container maxWidth="md">
+              <TextField
+                label="Name"
+                name="name"
+                variant="filled"
+                required
+                fullWidth
+                sx={{ backgroundColor: 'white', borderRadius: 1, my: 2 }}
+                value={ name }
+                onChange={ (e) => setName(e.target.value) }
+              />
+              <Button variant="contained" color="primary" fullWidth>
+                Test
+              </Button>
+            </Container>
+          </Box>
+          {
+            welcomeMessage && (
+              <Box
+                sx={{
+                  backgroundColor: 'white',
+                  border: 8,
+                  borderColor: 'primary.main',
+                  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                  borderRadius: 8,
+                  color: 'text.primary',
+                  p: 4,
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-around',
+                }}
+              >
+                <Typography
+                  variant="h4"
+                  gutterBottom
+                  sx={{
+                    color: 'text.primary',
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Sign Up for Personalised<br/>Recipe Recommendations
+                </Typography>
+                <Container maxWidth="md">
+                  <TextField
+                    label="Email Address"
+                    name="email"
+                    type="email"
+                    variant="filled"
+                    required
+                    fullWidth
+                    sx={{ backgroundColor: 'white', borderRadius: 1, my: 2 }}
+                    value={ email }
+                    onChange={ (e) => setEmail(e.target.value) }
+                  />
+                  <Button variant="contained" color="primary" fullWidth onClick={ handleSubmitEmailSignup }>
+                    Submit
+                  </Button>
+                </Container>
+              </Box>
+            )
+          }
+        </>
       )}
     </Box>
   )

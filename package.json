@@ -6,6 +6,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@helixml/apps-client": "^0.1.2",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@testing-library/jest-dom": "^5.14.1",
@@ -28,7 +29,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "helix:server": "bash helix-server.sh"
   },
   "eslintConfig": {
     "extends": [
