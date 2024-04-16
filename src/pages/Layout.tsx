@@ -54,7 +54,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 alignItems: 'center',
               }}
             >
-              <Box
+              {/* <Box
                 sx={{
                   mr:7,
                 }}
@@ -69,7 +69,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                   {item.name}
                 </Button>
               ))}
-              </Box>
+              </Box> */}
             </Box>
           </Toolbar>
         </AppBar>

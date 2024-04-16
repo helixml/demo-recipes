@@ -9,11 +9,11 @@ if [[ -z $OPENAI_API_KEY ]]; then
   exit 1
 fi
 
-docker run --rm \
+docker run -t --rm \
   --entrypoint "/helix" \
   -e PORT=8080 \
   -e OPENAI_API_KEY \
   -e REPO_DIR=/repo \
   -p 8005:8080 \
   -v $PWD:/repo \
-  helix_api gptscript
+  $IMAGE gptscript
