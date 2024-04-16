@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { Box, Typography, Button, TextField, Container, Alert, Card, CardMedia, Link } from '@mui/material'
-import AppClient from './client'
+import AppClient from '@helixml/apps-client'
 import Loading from '../components/Loading'
 
 import heartHealthy from '../assets/img/heart-healthy.jpg'
 import spiceySpecials from '../assets/img/spicy-special.jpg'
 import sweetTreats from '../assets/img/sweet-treats.jpg'
 
+const urlParams = new URLSearchParams(window.location.search)
+const accessToken = urlParams.get('access_token') || ''
+
 const appClient = AppClient({
-  token: 'abc',
+  token: accessToken,
 })
 
 const Dashboard = () => {
@@ -90,6 +93,16 @@ const Dashboard = () => {
     }
 
     setLoading(false)
+  }
+
+  if(!accessToken) {
+    return (
+      <Box sx={{ maxWidth: 600, m: 'auto', bgcolor: '#FAFAFA', p: 2 }}>  
+        <Alert severity="error" sx={{ mt: 2 }}>
+          ?access_token=XXX is required
+        </Alert>
+      </Box>
+    )
   }
 
   if(recipesError || recipes.length > 0) {
