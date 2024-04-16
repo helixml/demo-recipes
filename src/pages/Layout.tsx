@@ -1,21 +1,7 @@
 import React, { ReactNode } from 'react'
-import { Box, Container, AppBar, Toolbar, Button } from '@mui/material'
-
-import DashboardIcon from '@mui/icons-material/Dashboard'
-import EmailIcon from '@mui/icons-material/Email'
-
-// Define navigation items with route and corresponding icon
-const navigationItems = [
-  { name: 'Dashboard', icon: <DashboardIcon />, route: '/dashboard' },
-  { name: 'Email', icon: <EmailIcon />, route: '/email' }
-]
+import { Box, Container, AppBar, Toolbar } from '@mui/material'
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  // Function to navigate to different routes
-  const navigate = (route: string) => {
-    window.location.href = route
-  }
-
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Box
@@ -45,32 +31,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
               width: '100%',
             }}
           >
-            
-              <img src="https://www.johnlewispartnership.media/assets/johnlewispartnership__site/images/waitrose167821.png" alt="Navigation Logo" style={{ height: '20px', filter: 'brightness(0) invert(1)' }} />
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-              }}
-            >
-              {/* <Box
-                sx={{
-                  mr:7,
-                }}
-              >
-                {navigationItems.map((item) => (
-                <Button
-                  key={item.name}
-                  startIcon={item.icon}
-                  color="inherit"
-                  onClick={() => navigate(item.route)}
-                >
-                  {item.name}
-                </Button>
-              ))}
-              </Box> */}
-            </Box>
+            <img src="https://www.johnlewispartnership.media/assets/johnlewispartnership__site/images/waitrose167821.png" alt="Navigation Logo" style={{ height: '20px', filter: 'brightness(0) invert(1)' }} />
           </Toolbar>
         </AppBar>
       </Box>
