@@ -34,6 +34,7 @@ const Email = () => {
         ].map((recipe, index) => (
           <Box key={index} sx={{ flex: { xs: '1 1 100%', sm: '1 1 30%' }, mb: 2, p: 1, bgcolor: '#FFFFFF', border: 'none', marginX: '1%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <img
+              alt={recipe.name}
               src={recipe.image}
               style={{ 
                 margin: '8px',
