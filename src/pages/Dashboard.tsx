@@ -95,7 +95,7 @@ const Dashboard = () => {
     setLoading(false)
   }
 
-  if(!accessToken) {
+  if(!accessToken && window.location.hostname != 'localhost') {
     return (
       <Box sx={{ maxWidth: 600, m: 'auto', bgcolor: '#FAFAFA', p: 2 }}>  
         <Alert severity="error" sx={{ mt: 2 }}>
