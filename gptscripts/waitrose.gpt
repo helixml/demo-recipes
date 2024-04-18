@@ -1,14 +1,12 @@
-tools: recipe.query, sys.read, sys.exec, sys.write, sys.append
+tools: recipe.query, purchases.query, sys.read, sys.exec, sys.write, sys.append
 args: user_id: The user_id we want to know about.
 args: recipe_theme: The theme of the recipes.
 args: number: The number of recipes to output.
 
 Do the following steps sequentially and only write and read files as instructed:
-  1. Run {recipe.query} to get a list of candidate recipes for the given user as a CSV file written to recipes.csv.
-  2. Read recipes.csv which is the output of the previous step.
-  3. Run {purchases.query} to get a list of the top 10 products most bought by the given user.
-  4. Read purchases.csv which is the output of the previous step.
-  5. Output a JSON list of {number}, {recipe_theme} theme recipes that you think the user would like based on the theme and their purchase history, with justification in the summary.
+  1. Run tool {recipe.query} to get a list of candidate recipes for the given user as a CSV file written to recipes.csv.
+  2. Run tool {purchases.query} to get a list of the top 10 products most bought by the given user written to purchases.csv.
+  3. Read files recipes.csv (the suggested recipes) and purchases.csv (the user's previous top purchase history) and output a JSON list of {number}, {recipe_theme} theme recipes that you think the user would like based on their purchase history.
 
 Format the final output in a strict JSON format.
 Format the output to display recipe details including name, summary, and image URL.
@@ -17,36 +15,34 @@ For example, say in the summary (not including parts in square brackets) "We tho
 
 Output the exact image url from the CSV file, do not invent one. Output format:
 
+\`\`\`json
 [{
   "recipe.name": "name",
   "recipe.summary": "summary", 
   "recipe.imageurl": "imageurl"
 }]  
+\`\`\`
 
 ---
 name: purchases.query
 tools: sys.exec
-description: Query for the top 10 products most bought products by user_id.
+description: Query for the top 10 products most bought products by user_id, writing result to purchases.csv.
 --command
 sqlite3 recipes.sqlite <<EOF
 .headers on
 .mode csv
 .output purchases.csv
 SELECT product, quantity
-FROM Products p
-WHERE p.id IN (
-SELECT id
 FROM Purchases
 WHERE user_id = '${user_id}'
 ORDER BY quantity DESC
-LIMIT 10
-);
+LIMIT 10;
 EOF
 
 ---
 name: recipe.query
 tools: sys.exec
-description: Query for the top 10 most bought products by user_id, get their recipe ids, and extract recipe data to a csv file.
+description: Query for the top 10 most bought products by user_id, get their recipe ids, and extract recipe data to a recipes.csv file.
 --command
 sqlite3 recipes.sqlite <<EOF
 .headers on
