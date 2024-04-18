@@ -11,7 +11,7 @@ Do the following steps sequentially and only write and read files as instructed:
 Format the final output in a strict JSON format.
 Format the output to display recipe details including name, summary, and image URL.
 In the summary, justify to the user why they would like the recipe.
-For example, say in the summary (not including parts in square brackets) "We thought you would like this fish pie [chosen recipe] because you have previously bought cod and potatoes [previously purchased products]. It matches heart healthy [chosen theme] because [insert justification based on nutritional information]"
+For example, say in the summary (not including parts in square brackets) "We thought you would like this recipe because you have previously bought cod and potatoes [previously purchased products]. It matches heart healthy [chosen theme] because [insert justification based on nutritional information]"
 
 Output the exact image url from the CSV file, do not invent one. Output format:
 
