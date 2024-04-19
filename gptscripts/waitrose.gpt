@@ -1,4 +1,4 @@
-tools: recipe.query, purchases.query, sys.read, sys.exec, sys.write, sys.append
+tools: recipe.query, purchases.query, sys.read
 args: user_id: The user_id we want to know about.
 args: recipe_theme: The theme of the recipes.
 args: number: The number of recipes to output.
@@ -11,7 +11,7 @@ Do the following steps sequentially and only write and read files as instructed:
 Format the final output in a strict JSON format.
 Format the output to display recipe details including name, summary, and image URL.
 In the summary, justify to the user why they would like the recipe.
-For example, say in the summary (do NOT include parts in square brackets) "We thought you would prob like this recipe because you have previously bought cod and potatoes [previously purchased products]. It matches heart healthy [chosen theme] because [insert justification based on nutritional information]"
+For example, say in the summary (do NOT include parts in square brackets) "We thought you would like this recipe because you have previously bought cod and potatoes [previously purchased products]. It matches heart healthy [chosen theme] because [insert justification based on nutritional information]"
 
 Only include previously purchased products that appear in the recipe.
 
