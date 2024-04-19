@@ -1,5 +1,7 @@
 # Helix GPTScript Recipe Demo
 
+**Check out the tutorial on how to use this repo at [https://docs.helix.ml/helix/develop/apps/](https://docs.helix.ml/helix/develop/apps/)**
+
 ## gptscript
 
 To run the script use the following.
