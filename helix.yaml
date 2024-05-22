@@ -4,4 +4,4 @@ assistants:
 - name: Recipe recommender
   description: This assistant recommends recipes for a given customer email address by calling a gptscript
   gptscripts:
-    - file: scripts/*.gpt
+    - file: gptscripts/*.gpt
