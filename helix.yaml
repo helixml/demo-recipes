@@ -1,3 +1,7 @@
-gptscript:
-  files:
-    - gptscripts/*.gpt
+name: Personalized recipe recommender
+description: Send personalized emails with recipe recommendations
+assistants:
+- name: Recipe recommender
+  description: This assistant recommends recipes for a given customer email address by calling a gptscript
+  gptscripts:
+    - file: scripts/*.gpt
