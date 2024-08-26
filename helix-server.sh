@@ -2,7 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-export IMAGE=${IMAGE:="europe-docker.pkg.dev/helixml/helix/gptscript_devserver:latest"}
+export IMAGE=${IMAGE:="registry.helix.ml/helix/gptscript_devserver:latest"}
 export OPENAI_API_KEY=${OPENAI_API_KEY:=""}
 
 if [[ -z $OPENAI_API_KEY ]]; then
